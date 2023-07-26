@@ -29,7 +29,10 @@ public class FizzBuzzRuleEngine : IFizzBuzzRuleEngine
 
         foreach (var rule in _fizzBuzzRules)
         {
-            ruleResult.Append(rule.Execute(model));
+            if (rule.RuleShouldRun(model.InputNumber))
+            {
+                ruleResult.Append(rule.Execute(model));
+            }
         }
 
         return string.IsNullOrEmpty(ruleResult.ToString())

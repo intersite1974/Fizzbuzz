@@ -31,4 +31,9 @@ public class BuzzRule : IFizzBuzzRule
             ? "Buzz"
             : string.Empty;
     }
+
+    public bool RuleShouldRun(int number)
+    {
+        return !(number % 3 == 0 && number % 5 == 0);
+    }
 }

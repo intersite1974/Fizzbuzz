@@ -36,4 +36,9 @@ public class FizzBuzzRule : IFizzBuzzRule
             return string.Empty;
         }
     }
+
+    public bool RuleShouldRun(int number)
+    {
+        return true;
+    }
 }

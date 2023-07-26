@@ -89,6 +89,38 @@ public class BuzzRuleTests
         validationServiceMock.Verify(x => x.ValidateInputModel(model), Times.Once);
     }
 
+    [Theory]
+    [MemberData(nameof(GetNonApplicableMod3AndMod5BasedNumbers))]
+    public void GIVEN_BuzzRule_WHEN_RuleShouldRun_AND_Both_Mod3_AND_Mod5_Not_Applicable_THEN_Expected_True_Result_Returned(int inputValue)
+    {
+        // Arrange
+        Mock<IValidationService> validationServiceMock = new();
+
+        var sut = new BuzzRule(validationServiceMock.Object);
+
+        // Act
+        var result = sut.RuleShouldRun(inputValue);
+
+        // Assert
+        result.Should().Be(true);
+    }
+
+    [Theory]
+    [MemberData(nameof(GetApplicableMod3AndMod5BasedNumbers))]
+    public void GIVEN_BuzzRule_WHEN_RuleShouldRun_AND_Both_Mod3_AND_Mod5_Not_Applicable_THEN_Expected_False_Result_Returned(int inputValue)
+    {
+        // Arrange
+        Mock<IValidationService> validationServiceMock = new();
+
+        var sut = new BuzzRule(validationServiceMock.Object);
+
+        // Act
+        var result = sut.RuleShouldRun(inputValue);
+
+        // Assert
+        result.Should().Be(false);
+    }
+
     public static IEnumerable<object[]> GetApplicableModBasedNumbers()
     {
         var result = new List<object[]>();

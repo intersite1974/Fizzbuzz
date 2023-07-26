@@ -89,6 +89,21 @@ public class FizzBuzzRuleTests
         validationServiceMock.Verify(x => x.ValidateInputModel(model), Times.Once);
     }
 
+    [Fact]
+    public void GIVEN_FizzBuzzRule_WHEN_RuleShouldRun_THEN_ShouldReturnTrue()
+    {
+        // Arrange
+        Mock<IValidationService> validationServiceMock = new();
+
+        var sut = new FizzBuzzRule(validationServiceMock.Object);
+
+        // Act
+        var result = sut.RuleShouldRun(It.IsAny<int>());
+
+        // Assert
+        result.Should().Be(true);
+    }
+
     public static IEnumerable<object[]> GetApplicableModBasedNumbers()
     {
         var result = new List<object[]>();
